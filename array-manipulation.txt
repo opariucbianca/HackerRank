@@ -1,0 +1,37 @@
+public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int N = in.nextInt();
+        int M = in.nextInt();
+        
+        long arr[] = new long[N];
+        
+        for(int j = 0; j<M; j++){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            long k = in.nextLong();
+            
+            
+            arr[a-1] +=k;
+            if(b<N){
+                arr[b] -=k; 
+            }
+            
+           
+        }
+        
+        long biggestNum = 0;
+        long sum = 0;
+        for(int arr_i = 0; arr_i<N; arr_i++){
+                
+            sum = sum+arr[arr_i];
+            
+                if(biggestNum < sum){
+                    biggestNum = sum;
+                }
+                
+            }
+        
+        System.out.println(""+biggestNum);
+        
+    }
