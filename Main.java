@@ -1,6 +1,7 @@
+package com.pluralsight.getorganized;
 
-
-package com.company;
+import static java.lang.Integer.max;
+import static java.lang.Math.abs;
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -12,37 +13,30 @@ import java.util.regex.*;
 
 public class Main {
 
-    static String isValid(String s)
-    {
-        final String GOOD="YES";
-        final String BAD="NO";
-
-        if(s.isEmpty()) return BAD;
-        if(s.length()<=3) return  GOOD;
-
-        int[]  letters= new int[26];
-        for(int i=0;i<s.length();i++){
-            letters[s.charAt(i)-'a']++;
-        }
-        Arrays.sort(letters);
-        int i=0;
-        while(letters[i]==0){
-            i++;
-        }
-        int min=letters[i];
-        int max=letters[25];
-        String ret=BAD;
-        if(min==max)ret=GOOD;
-        else{
-            if(max-min==1)
-                ret=GOOD;
-        }
-        return ret;
+    static int makeAnagram(String a, String b) {
+        int[] letters1=new int[27];
+        int[] letters2=new int[27];
+        int count=0;
+        for(int i=0;i<a.length();i++)
+           letters1[a.charAt(i)-'a']++;
+       for(int i=0;i<b.length();i++)
+             letters2[b.charAt(i)-'a']++;
+       for(int i=0;i<26;i++)
+           count+=abs(letters1[i]-letters2[i]);
+       return count;
     }
-    public static void main(String[] args) {
-	Scanner scanner=new Scanner(System.in);
-	String s=scanner.nextLine();
-	String result=isValid(s);
-	System.out.println(result);
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+
+        String a = scanner.nextLine();
+
+        String b = scanner.nextLine();
+
+        int res = makeAnagram(a, b);
+
+        System.out.println(res);
+
+        scanner.close();
     }
 }
