@@ -1,29 +1,17 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+int arr[100000],n,k,unfairness=100000;
 
-int main(){
-
-int n;
-int k;
-cin >> n >> k;
-vector <int> c(n);
-for(int i=0;i<n;i++) cin >> c[i];
-
-vector <int> p(k); // stores how many times a person has bought flowers
-int pIndex=0;
-int minCost=0;
-sort(c.begin(),c.end());
-
-// rotate people to buy from the costliest to the cheapest flowers
-for (int i=c.size()-1;i>=0;i--) {
-    minCost+=(p[pIndex]+1)*c[i];
-    p[pIndex]++;
-
-    // goto next guy
-    pIndex++;
-    if (pIndex>=k) pIndex=0;
-}
-
-cout << minCost << endl;
-return 0;
+int main()
+{
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+        cin>>arr[i];
+    sort(arr+1,arr+1+n);
+    for(int i=1;i<=n-k+1;i++)
+        if(arr[i+k-1]-arr[i]<unfairness)
+        unfairness=arr[i+k-1]-arr[i];
+    cout<<unfairness;
+    return 0;
 }
